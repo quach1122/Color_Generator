@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        div{
+            /*background-color: red;*/
+            width: 450px;
+            height: 450px;
+
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var div = document.getElementsByTagName('div')[0];
+            var color;
+            window.addEventListener('keydown',function(e){
+                if(e.keyCode == '37'){
+                    div.style.backgroundColor = randomColor();
+                }
+                else if(e.keyCode =='38'){
+
+                    div.style.backgroundColor = intensity(-10);
+                }
+                else if(e.keyCode =='39'){
+                    div.style.backgroundColor = randomColor();
+                }
+                else if(e.keyCode == '40'){
+                    div.style.backgroundColor = intensity(+10);
+                }
+            });
+            function randomColor(intensity){
+                color= 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+                return color;
+            }
+            function intensity(value){
+                var temp = /\(([^)]+)\)/.exec(color)[1];
+                var splitVal = temp.split(',');
+                var r = parseInt(splitVal[0]) + value;
+                var g = parseInt(splitVal[1]) + value;
+                var b = parseInt(splitVal[2]) + value
+                if(r >= 0 && r <= 256 && g >= 0 && g <= 256 && b >= 0 && b <= 256){
+                    color = 'rgb(' + r+ ',' + g+ ',' + b+ ')';
+                }
+                return color;
+            }
+        });
+    </script>
+</head>
+<body>
+<div>
+</div>
+</body>
+</html>
